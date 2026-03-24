@@ -1,8 +1,0 @@
-"0","selected_data <-  raw_data |> "
-"0","  select(occurrenceID, eventDate, year, stateProvince, locality, decimalLatitude, decimalLongitude, geodeticDatum, scientificName, vernacularName, species, basisOfRecord) |> "
-"0","  filter(year >=2016& year<=2026) |> "
-"0","  filter(occurrenceID !="""", !is.na(occurrenceID)) |> "
-"0","  na.omit(decimalLatitude) |> "
-"0","   na.omit(decimalLongitude) |>"
-"0","  distinct(occurrenceID, .keep_all = TRUE)"
-"0","write_csv(selected_data, ""Tidied_data/Ex1/Kangaroos_Occurence.csv"")"

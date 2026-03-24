@@ -1,3 +1,0 @@
-"0","selected_data |> "
-"0","  group_by(scientificName) |> "
-"0","summarise(n=n())"

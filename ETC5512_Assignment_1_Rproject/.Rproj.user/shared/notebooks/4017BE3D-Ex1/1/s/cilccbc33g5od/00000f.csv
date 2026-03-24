@@ -1,7 +1,0 @@
-"0","Bega<- read_csv(""data/Ex1/Bega.csv"", skip = 7, show_col_types = FALSE, col_types = cols(.default = col_character()))"
-"0","Cessnock<- read_csv(""data/Ex1/Cessnock.csv"", skip = 7, show_col_types = FALSE, col_types = cols(.default = col_character()))"
-"1","[1m[33mError[39m:[22m
-[38;5;238m[33m![38;5;238m ]8;;file:///Users/alexzhang/Desktop/ETC5512_Assignment_1_Rproject/data/Ex1/Cessnock.csv[34mdata/Ex1/Cessnock.csv[38;5;238m]8;; does not exist in current working directory:
-  ]8;;file:///Users/alexzhang/Desktop/ETC5512_Assignment_1_Rproject[34m/Users/alexzhang/Desktop/ETC5512_Assignment_1_Rproject[38;5;238m]8;;.[39m
-[90mRun `]8;;x-r-run:rlang::last_trace()rlang::last_trace()]8;;` to see where the error occurred.[39m
-"
