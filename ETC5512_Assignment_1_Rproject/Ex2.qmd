@@ -1,0 +1,133 @@
+---
+title: "Ex2"
+format: html
+editor: visual
+---
+
+## firstly active R packages which required to use in this exercise and read the raw data
+
+```{r, message=FALSE}
+library(tidyverse)
+library(dplyr)
+raw_data <- read.csv("data/Ex2/Macropus_Occurance.csv")
+```
+
+## use select() to choose columns required from raw data, select the data in the time of 10 years.then, drop the NA or blank cell from occurrence ID, decimalLatitude and decimalLongitude. finally, remove repeated value in the column of occureneID.
+
+```{r}
+selected_data <-  raw_data |> 
+  select(occurrenceID, eventDate, year, stateProvince, locality, decimalLatitude, decimalLongitude, geodeticDatum, scientificName, vernacularName, species, basisOfRecord) |> 
+  filter(year >=2016& year<=2026) |> 
+  filter(occurrenceID !="", !is.na(occurrenceID)) |> 
+  na.omit(decimalLatitude) |> 
+   na.omit(decimalLongitude) |>
+  distinct(occurrenceID, .keep_all = TRUE)
+write_csv(selected_data, "Tidied_data/Ex1/Kangaroos_Occurence.csv")
+```
+
+## summarise the number of each Basis of record
+
+```{r}
+selected_data |> 
+  group_by(basisOfRecord) |> 
+summarise(n=n())
+```
+
+## summarise the number of kangaroo occurence in each year
+
+```{r}
+selected_data |> 
+  group_by(year) |> 
+summarise(n=n())
+```
+
+## summarise the number of each species of kangaroos from 2016-2026
+
+```{r}
+selected_data |> 
+  group_by(scientificName) |> 
+summarise(n=n())
+```
+
+# meta data descreption
+
+## time range
+
+as the data set in ALA include all of the occurrence record of kangaroos, i only downloaded data from 1950 and filtered occurrence record from 2016 to 2026 to make the analyse meaningful.
+
+## group of kangaroos selection
+
+Macropus has been used to search for data set. the reason i chose to use 'Macropus' is the purpose of this project is to analyse the relationship of car accident and kangaroos, if use 'Macropodidae' which is defined in biological terms will result in a broader range of species being included.
+
+## space selection
+
+the space of data has been fixed with only search the occurrence in Victoria that does not need any tidy after downloading.
+
+## data doi
+
+the doi of data is [ALA](https://doi.ala.org.au/doi/0c3ae535-302a-45f5-b8cf-94acc892de92).
+
+## additional information
+
+the search model of ALA has pre-screened data by exclude records based on scientific name quality, exclude records with additional spatial quality issues... please use the doi link above for more details.
+
+## explaination of variables
+
+as we only research the relationship between occurrence of kangaroos in VIC, there need to filter the columns which required for analysis.
+
+### occurenceID
+
+unique number of each kangaroo occurrence been recorded which could be used to find out whether have repeated data.
+
+### eventDate
+
+time of the kangaroo occurred.
+
+### Year
+
+year of occurrence, here is used to filter data.
+
+### stateProvince/locality
+
+state /province and accurate locality of kangaroos occurred
+
+### decimalLatitude/decimalLongitude and geodeticDatum
+
+precise geographic corrdinates of occurrence record which could be used for visualization and comparing.
+
+### scientificName & vernaluerName & species
+
+Classification of Kangaroo species based on different nimencalture systems.
+
+### basisOfRecord
+
+the method of recording
+
+# representativeness of sample
+
+the sample here is representative because ALA has merged data of occurrence of kangaroos from many institutions, the sample downloaded includes all known data, thus i believe the experimental sample is representative.
+
+# animal included in sample
+
+according to the resul of summary of data which has been filtered shown there has mainly Macropus fuliginosus and Macropus giganteus, Macropus fuliginosus melanops is the subspecies of Macropus fuliginosus. also, there have 4 Macropus been recorded which means they are not precisely recorded.
+
+# data limitation
+
+## gap between record and actual situation
+
+though the ALA has merged data from different insitutes, there still have the problem that unable to fully record all occurrence data, but only the kangaroos which been observated.
+
+## variations by year
+
+the development of technology could also affect the data recording, the summary of basis of record has shown that 15287 of data is recorded by human observation and 2340 is machine observation, also, the summary of record amount each year show that the count of record has significantly increased from 2019. this could be explained with the development of mobile technology which allow people to upload their discovery, but years before the data could only rely on observers' recording.
+
+# Useage permission
+the data for this exercise is from [ALA](https://www.ala.org.au), the license of this data is under the Creative Commons Attribution 3.0 Australia licence which allowed to share and adopt under the term of Attribution and no additional restrictions.
+
+# Citation
+```{r}
+citation("dplyr")
+citation("tidyverse")
+
+```
+

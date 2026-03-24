@@ -1,0 +1,5 @@
+"0","disaster_stricken_road <-  road_coordination_tidied |>"
+"0","  filter(Title %in% c(""ADVERSE WEATHER Water over road"", ""FLOODING"")) |> "
+"0","  filter(str_detect(Impact,""closed|Closed"")) |> "
+"0","  distinct(ID, .keep_all = TRUE)"
+"0","write_csv(disaster_stricken_road, ""Tidied_data/Ex1/disaster_striken_road.csv"")"
